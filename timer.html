@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body align="center">
+  <h1>Countdown Timer</h1>
+  <div id="timer">00:00:00</div>
+  <button onclick="startTimer()">Start</button>
+  <button onclick="stopTimer()">Stop</button>
+  <button onclick="resetTimer()">Reset</button>
+
+  <script>
+var timer;
+var time = 0;
+
+function startTimer() {
+  if (!timer) {
+    timer = setInterval(updateTimer, 1000);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+  timer = null;
+}
+
+function resetTimer() {
+  stopTimer();
+  time = 0;
+  updateDisplay();
+}
+
+function updateTimer() {
+  time++;
+  updateDisplay();
+}
+
+function updateDisplay() {
+  var hours = Math.floor(time / 3600);
+  var minutes = Math.floor((time % 3600) / 60);
+  var seconds = time % 60;
+
+  var formattedTime =
+    (hours < 10 ? "0" + hours : hours) +
+    ":" +
+    (minutes < 10 ? "0" + minutes : minutes) +
+    ":" +
+    (seconds < 10 ? "0" + seconds : seconds);
+
+  document.getElementById("timer").textContent = formattedTime;
+}
+
+</script>
+</body>
+</html>
